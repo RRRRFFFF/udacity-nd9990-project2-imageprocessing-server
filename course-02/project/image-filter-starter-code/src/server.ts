@@ -1,9 +1,5 @@
-// test to see if I've got the remote git working
+// check to see if I've got the remote git working
 // $ cd /Users/rfilardo/Dropbox/Rebecca-Private/git-everything/learning-Udacity/nd9990-cloud-developer-ALL/course-02/project/image-filter-starter-code
-
-
-// I took this other person's line 34: 
-// https://github.com/rashadmad/udagram/blob/master/src/server.ts
 
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -43,12 +39,23 @@ http://{{EB_URL}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia
     let { image_url } = req.query;
 
 // using "then"
-    filterImageFromURL(image_url).then(filteredImagePath => {
-      res.sendFile(filteredImagePath);
-    });
-  });
 
- 
+// I took this other person's line 34 and used it here: 
+// https://github.com/rashadmad/udagram/blob/master/src/server.ts
+
+
+    if ( !image_url ) {
+      return res.status(400)
+        .send(`image_url is required`);
+    }
+
+    filterImageFromURL(image_url).then(filteredImagePath => {
+      return res.status(200)
+        .sendFile(filteredImagePath);
+    })
+
+    ;
+  });
 
   // Start the Server
   app.listen( port, () => {
