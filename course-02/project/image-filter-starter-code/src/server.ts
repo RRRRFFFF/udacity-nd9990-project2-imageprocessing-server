@@ -11,11 +11,19 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   const app = express();
 
   // Set the network port
-  const port = process.env.PORT || 8082;
+//  const port = process.env.PORT || 8082;
+
+ // const port = 8082; 
+  const port = 3000; 
+
   
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
+
+// **** NOTE: ***
+
+/* if it says "CANNOT GET /" that's because you haven't used a correct test example as below */
 
 /* Query Parameter: the data that is passed after a question mark in the URL)
 
@@ -60,6 +68,7 @@ http://{{EB_URL}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia
   // Start the Server
   app.listen( port, () => {
       console.log( 'server running http://localhost:${ port }' );
+      console.log( 'server running http://localhost:' + port );
       console.log( 'press CTRL+C to stop server' );
   } );
 })();
