@@ -1,5 +1,7 @@
-// check to see if I've got the remote git working
+// test to see if I've got the remote git working
 // $ cd /Users/rfilardo/Dropbox/Rebecca-Private/git-everything/learning-Udacity/nd9990-cloud-developer-ALL/course-02/project/image-filter-starter-code
+
+
 
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -11,19 +13,11 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   const app = express();
 
   // Set the network port
-//  const port = process.env.PORT || 8082;
-
- // const port = 8082; 
-  const port = 3000; 
-
+  const port = process.env.PORT || 8082;
   
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
-
-// **** NOTE: ***
-
-/* if it says "CANNOT GET /" that's because you haven't used a correct test example as below */
 
 /* Query Parameter: the data that is passed after a question mark in the URL)
 
@@ -51,24 +45,17 @@ http://{{EB_URL}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia
 // I took this other person's line 34 and used it here: 
 // https://github.com/rashadmad/udagram/blob/master/src/server.ts
 
-
-    if ( !image_url ) {
-      return res.status(400)
-        .send(`image_url is required`);
-    }
-
     filterImageFromURL(image_url).then(filteredImagePath => {
-      return res.status(200)
-        .sendFile(filteredImagePath);
-    })
-
-    ;
+      res.sendFile(filteredImagePath);
+    });
   });
+
+ 
 
   // Start the Server
   app.listen( port, () => {
-      console.log( 'server running http://localhost:${ port }' );
       console.log( 'server running http://localhost:' + port );
+
       console.log( 'press CTRL+C to stop server' );
   } );
 })();
